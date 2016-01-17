@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>dd22321c-fc3b-441f-b91c-02884c7b6c4f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>driver.py</StartupFile>
+    <StartupFile>check.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="b_xylophilus.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="check.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="driver.py">

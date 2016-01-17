@@ -5,6 +5,7 @@ import urllib
 import gzip
 import shutil
 import tarfile
+import subprocess
 
 
 def download_file( organism_name, type ):
@@ -20,6 +21,21 @@ def untar(fname):
         loc = fname.split(os.path.sep)[0]
         tar.extractall(loc)
         tar.close()
+
+def unzip(location, genome_url):
+    zip_file = gzip.open(location,"rb")
+    un_name = genome_url[1].split(".")[0] + ".fa"
+    line = location.split(os.path.sep)[0]
+    location = os.path.join(line,un_name)
+    uncompressed_file = open(location,"wb")
+
+    decoded = zip_file.read()
+    uncompressed_file.write(decoded)
+
+    zip_file.close()
+    uncompressed_file.close()
+    return location
+
 
 def main():
 
@@ -42,31 +58,35 @@ def main():
         location = os.path.join(line,genome_url[1])
         urllib.urlretrieve(genome_url[0], location)
 
-        zip_file = gzip.open(location,"rb")
-        un_name = genome_url[1].split(".")[0] + ".fa"
-        location = os.path.join(line,un_name)
-        uncompressed_file = open(location,"wb")
+        c_elegans_url = download_file("c_elegans","protein")
+        c_elegans_loc = os.path.join(line, c_elegans_url[1])
+        urllib.urlretrieve(c_elegans_url[0], c_elegans_loc)
 
-        decoded = zip_file.read()
-        uncompressed_file.write(decoded)
+        location = unzip(location, genome_url)
+        c_elegans_loc = unzip(c_elegans_loc, c_elegans_url)
 
-        zip_file.close()
-        uncompressed_file.close()
-        
         os.system("python Prototype1.py " + location)
-
+        os.system("python Prototype1.py " + c_elegans_loc)
 
         # Need to move the files after being processed.
-
         file_loc = location.split(".")[0]
         file_loc = file_loc + "_g.fa"
 
+        c_elegans_proc = c_elegans_loc.split(".")[0]
+        c_elegans_proc = c_elegans_proc + "_g.fa"
 
-        dest_loc = os.path.join(location.split(".")[0], "inparanoid_4.1")
-        dest_loc = os.path.join(dest_loc,file_loc.split(os.path.sep)[-1])
+        dest_loc = os.path.join(location.split(os.path.sep)[0], "inparanoid_4.1")
+        line_dest_loc = os.path.join(dest_loc,file_loc.split(os.path.sep)[-1])
+        c_elegans_dest = os.path.join(dest_loc,c_elegans_proc.split(os.path.sep)[-1])
+        perl_loc = os.path.join(dest_loc,"inparanoid.pl")
 
         if os.path.isfile(file_loc):
-            shutil.copyfile(file_loc,dest_loc)
+            shutil.copyfile(file_loc,line_dest_loc)
+        if os.path.isfile(c_elegans_loc):
+            shutil.copyfile(c_elegans_loc,c_elegans_dest)
+
+        #var = "c_elegans.fa " + file_loc.split(os.path.sep)[-1]
+        #pipe = subprocess.Popen(["perl",perl_loc, "c_elegans.fa", file_loc.split(os.path.sep)[-1]])
 
 if __name__ == "__main__":
     main()
