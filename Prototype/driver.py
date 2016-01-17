@@ -1,0 +1,72 @@
+import sys
+import time
+import os
+import urllib
+import gzip
+import shutil
+import tarfile
+
+
+def download_file( organism_name, type ):
+    ftp_site = "ftp://ftp.wormbase.org/pub/wormbase/species/"
+    file_name = organism_name + ".canonical_bioproject.current." + type + ".fa.gz"
+    url = ftp_site + organism_name + "/sequence/" + type + "/" + file_name
+    data = [url,file_name]
+    return data
+
+def untar(fname):
+    if (fname.endswith("tar.gz")):
+        tar = tarfile.open(fname)
+        loc = fname.split(os.path.sep)[0]
+        tar.extractall(loc)
+        tar.close()
+
+def main():
+
+    f = open("organisms.txt", "r")
+
+    for line in f:
+        line = line.rstrip("\n")
+        if os.path.exists(line):
+            shutil.rmtree(line)
+            os.makedirs(line)
+        else:
+            os.makedirs(line)
+
+        inparanoid_file_name = "inparanoid_4.1.tar.gz"
+        inparanoid_file_loc = os.path.join(line,inparanoid_file_name)
+        shutil.copyfile(inparanoid_file_name,inparanoid_file_loc)
+        untar(inparanoid_file_loc)
+
+        genome_url = download_file(line, "protein")
+        location = os.path.join(line,genome_url[1])
+        urllib.urlretrieve(genome_url[0], location)
+
+        zip_file = gzip.open(location,"rb")
+        un_name = genome_url[1].split(".")[0] + ".fa"
+        location = os.path.join(line,un_name)
+        uncompressed_file = open(location,"wb")
+
+        decoded = zip_file.read()
+        uncompressed_file.write(decoded)
+
+        zip_file.close()
+        uncompressed_file.close()
+        
+        os.system("python Prototype1.py " + location)
+
+
+        # Need to move the files after being processed.
+
+        file_loc = location.split(".")[0]
+        file_loc = file_loc + "_g.fa"
+
+
+        dest_loc = os.path.join(location.split(".")[0], "inparanoid_4.1")
+        dest_loc = os.path.join(dest_loc,file_loc.split(os.path.sep)[-1])
+
+        if os.path.isfile(file_loc):
+            shutil.copyfile(file_loc,dest_loc)
+
+if __name__ == "__main__":
+    main()

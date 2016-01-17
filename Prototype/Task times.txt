@@ -1,3 +1,0 @@
-Task 1: Removing white spaces - 56.6609997749 seconds
-Task 2: Extracting the longest isoforms - 242.58100009 seconds
-Tast 3: Writing the data from the dictionary to the output file "final.fa" - 0.164000034332 seconds

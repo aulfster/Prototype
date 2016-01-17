@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>dd22321c-fc3b-441f-b91c-02884c7b6c4f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Prototype.py</StartupFile>
+    <StartupFile>driver.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,20 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="b_xylophilus.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="driver.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="genenerate_thirty_three.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Prototype.py" />
+    <Compile Include="Prototype1.py" />
+    <Compile Include="test.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="c_elegans.fa" />

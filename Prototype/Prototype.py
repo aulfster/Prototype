@@ -1,8 +1,12 @@
 import sys
 import time
+import os
 
-f = open("c_elegans.fa","r")
+f = open(sys.argv[1],"r")
 t0 = time.time()
+
+
+text_file = open(sys.argv[1]+"_temp.fa","a")
 
 while True:
     line = f.readline()
@@ -11,10 +15,9 @@ while True:
     if line.startswith(">"):
         line = line.split("\t")[0]
         line = line + "\n"
-    with open("temp.fa", "a") as text_file:
-        text_file.write(line)
-    text_file.close()
+    text_file.write(line)
 
+text_file.close()
 f.close()
 
 timeFile = open("time.txt","a")
@@ -23,7 +26,7 @@ now = t1 - t0
 timeFile.write(str(now)+"\n")
 timeFile.close()
 
-f = open("temp.fa","r")
+f = open(sys.argv[1]+"_temp.fa","r")
 numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 mapping = {"tag" : None}
@@ -68,13 +71,15 @@ while True:
             mapping[tag] = writeString
 f.close()
 
+os.remove(sys.argv[1]+"_temp.fa")
+
 timeFile = open("time.txt","a")
 t2 = time.time()
 now = t2-t1
 timeFile.write(str(now)+"\n")
 timeFile.close()
 
-with open("final.fa", "a") as text_file:
+with open(sys.argv[2], "a") as text_file:
     del mapping["tag"]
     for key in mapping.keys():
         line = ">" + key + "\n" + mapping[key]
