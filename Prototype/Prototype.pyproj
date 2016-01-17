@@ -39,6 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="c_elegans.fa" />
+    <Content Include="inparanoid_4.1.tar.gz" />
+    <Content Include="organisms.txt" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
