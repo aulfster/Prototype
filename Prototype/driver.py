@@ -75,10 +75,10 @@ def main():
         c_elegans_proc = c_elegans_loc.split(".")[0]
         c_elegans_proc = c_elegans_proc + "_g.fa"
 
-        dest_loc = os.path.join(location.split(os.path.sep)[0], "inparanoid_4.1")
-        line_dest_loc = os.path.join(dest_loc,file_loc.split(os.path.sep)[-1])
-        c_elegans_dest = os.path.join(dest_loc,c_elegans_proc.split(os.path.sep)[-1])
-        perl_loc = os.path.join(dest_loc,"inparanoid.pl")
+        inparanoid_loc = os.path.join(location.split(os.path.sep)[0], "inparanoid_4.1")
+        line_dest_loc = os.path.join(inparanoid_loc,file_loc.split(os.path.sep)[-1])
+        c_elegans_dest = os.path.join(inparanoid_loc,c_elegans_proc.split(os.path.sep)[-1])
+        perl_loc = os.path.join(inparanoid_loc,"inparanoid.pl")
 
         if os.path.isfile(file_loc):
             shutil.copyfile(file_loc,line_dest_loc)

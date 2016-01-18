@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="c_elegans.fa" />
+    <Content Include="genBlast_v138_linux_x86_64.tar.gz" />
     <Content Include="inparanoid_4.1.tar.gz" />
     <Content Include="organisms.txt" />
   </ItemGroup>
