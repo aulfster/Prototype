@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 import time
 import os
 
@@ -103,7 +103,7 @@ with open(temp_file_name, "a") as text_file:
         text_file.write(line)        
 text_file.close()
 
-sys.exit("Finished with InParanoid preparation for " + organism_name + ".")
+sys.exit()
 
 
             

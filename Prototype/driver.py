@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 import time
 import os
 import urllib
@@ -82,8 +82,8 @@ def main():
 
         if os.path.isfile(file_loc):
             shutil.copyfile(file_loc,line_dest_loc)
-        if os.path.isfile(c_elegans_loc):
-            shutil.copyfile(c_elegans_loc,c_elegans_dest)
+        if os.path.isfile(c_elegans_proc):
+            shutil.copyfile(c_elegans_proc,c_elegans_dest)
 
         #var = "c_elegans.fa " + file_loc.split(os.path.sep)[-1]
         #pipe = subprocess.Popen(["perl",perl_loc, "c_elegans.fa", file_loc.split(os.path.sep)[-1]])

@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>dd22321c-fc3b-441f-b91c-02884c7b6c4f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>check.py</StartupFile>
+    <StartupFile>driver.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
